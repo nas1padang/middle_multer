@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Mengatur 4 item per baris */
+            grid-gap: 20px;
+        }
+
+        li {
+            background-color: white;
+            margin: 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        img {
+            max-width: 200px;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            margin: 0 auto; /* Membuat gambar menjadi rata tengah secara horizontal */
+        }
+
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        div.pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a.page-link {
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Movies</h1>
+    <ul>
+        <% movies.forEach((movie) => { %>
+            <li>
+                <% if (movie.photo) { %>
+                    <img src="/uploads/<%= movie.photo %>" alt="<%= movie.title %>" width="200" height="300">
+                <% } else { %>
+                    <img src="https://image.tmdb.org/t/p/w1280/51tqzRtKMMZEYUpSYkrUE7v9ehm.jpg" alt="<%= movie.title %>" width="200" height="300">
+                <% } %>
+                <h2><%= movie.title %></h2>
+                <p>Genres: <%= movie.genres %></p>
+                <p>Year: <%= movie.year %></p>
+            </li>
+        <% }); %>
+    </ul>
+    
+    <div class="pagination">
+        <% for(let i = 1; i <= totalPages; i++) { %>
+            <a href="/?page=<%= i %>" class="page-link"><%= i %></a>
+        <% } %>
+    </div>
+</body>
+</html>
